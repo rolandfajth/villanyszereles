@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fajth Roland E.V. | Villanyszerelés & Automatizálás</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0b0f11;
+            --card-bg: rgba(25, 20, 18, 0.5);
+            --primary-glow: #f97316;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --border-color: rgba(249, 115, 22, 0.2);
+            --border-hover: rgba(249, 115, 22, 0.6);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Ambient background glow */
+        .ambient-glow {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(249, 115, 22, 0.06) 0%, rgba(0,0,0,0) 70%);
+            top: -10%;
+            right: -10%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .ambient-glow-2 {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(249, 115, 22, 0.04) 0%, rgba(0,0,0,0) 70%);
+            top: 60%;
+            left: -10%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            background: rgba(11, 15, 17, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 100;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.4rem;
+            letter-spacing: 1px;
+            background: linear-gradient(45deg, #fff, var(--primary-glow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            flex: 1;
+        }
+
+        /* Centered Header Phone Link */
+        .nav-phone-center {
+            flex: 2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .phone-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            background: rgba(249, 115, 22, 0.08);
+            border: 1px solid rgba(249, 115, 22, 0.2);
+            padding: 0.5rem 1.2rem;
+            border-radius: 30px;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        .phone-cta:hover {
+            border-color: var(--primary-glow);
+            box-shadow: 0 0 15px rgba(249, 115, 22, 0.3);
+            background: rgba(249, 115, 22, 0.15);
+        }
+
+        .phone-icon-pulse {
+            color: var(--primary-glow);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); text-shadow: 0 0 0 rgba(249, 115, 22, 0.7); }
+            70% { transform: scale(1.1); text-shadow: 0 0 10px rgba(249, 115, 22, 0); }
+            100% { transform: scale(1); text-shadow: 0 0 0 rgba(249, 115, 22, 0); }
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            justify-content: flex-end;
+            flex: 1;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-main);
+        }
+
+        .lang-switch {
+            border: 1px solid var(--border-color);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            background: rgba(255,255,255,0.03);
+            color: white;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .lang-switch:hover {
+            border-color: var(--primary-glow);
+            box-shadow: 0 0 10px rgba(249, 115, 22, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 5%;
+            padding-top: 8rem;
+            position: relative;
+        }
+
+        .badge {
+            align-self: flex-start;
+            background: rgba(249, 115, 22, 0.1);
+            border: 1px solid var(--border-color);
+            color: var(--primary-glow);
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            letter-spacing: 1px;
+            max-width: 100%;
+        }
+
+        h1 {
+            font-size: 5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -2px;
+            max-width: 950px;
+            margin-bottom: 1.5rem;
+        }
+
+        h1 span {
+            background: linear-gradient(90deg, #f97316, #ffedd5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            line-height: 1.6;
+            max-width: 800px;
+            margin-bottom: 2.5rem;
+        }
+
+        /* Kiemelt, gomb stílusú telefonsáv a Hero alatt */
+        .contact-top-bar {
+            align-self: flex-start;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--text-main);
+            display: inline-flex;
+            gap: 1.5rem;
+            align-items: center;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 1rem 2rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: all 0.4s ease;
+        }
+
+        .contact-top-bar:hover {
+            border-color: var(--border-hover);
+            box-shadow: 0 0 20px rgba(249, 115, 22, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .contact-top-bar a {
+            color: var(--primary-glow);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .contact-top-bar a:hover {
+            text-shadow: 0 0 10px rgba(249, 115, 22, 0.4);
+        }
+
+        /* Bento Grid Services Section */
+        .section {
+            padding: 6rem 5%;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 3rem;
+            letter-spacing: -1px;
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .bento-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 2.5rem;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bento-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(249, 115, 22, 0.05);
+        }
+
+        .bento-card.wide {
+            grid-column: span 2;
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .bento-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .bento-card p {
+            color: var(--text-muted);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        /* Google Section */
+        .google-section {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .google-info {
+            padding-right: 2rem;
+        }
+
+        .rating-box {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(249, 115, 22, 0.1);
+            border: 1px solid rgba(249, 115, 22, 0.3);
+            color: var(--primary-glow);
+            padding: 0.5rem 1rem;
+            border-radius: 12px;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .reviews-btn {
+            display: inline-block;
+            background: linear-gradient(90deg, #f97316, #ea580c);
+            color: white;
+            padding: 1.2rem 2.5rem;
+            border-radius: 14px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 2rem;
+            transition: all 0.3s;
+            box-shadow: 0 10px 20px rgba(249, 115, 22, 0.2);
+            text-align: center;
+        }
+
+        .reviews-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(249, 115, 22, 0.4);
+        }
+
+        .map-container {
+            border-radius: 28px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            height: 450px;
+            position: relative;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+            width: 100%;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            filter: grayscale(0.5) invert(0.92) contrast(1.1) hue-rotate(160deg); 
+        }
+
+        /* Contact Form Section */
+        .contact-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 32px;
+            padding: 4rem;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.8rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 1.2rem;
+            border-radius: 14px;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-glow);
+            background: rgba(249, 115, 22, 0.02);
+            box-shadow: 0 0 15px rgba(249, 115, 22, 0.1);
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: white;
+            color: black;
+            border: none;
+            padding: 1.2rem;
+            border-radius: 14px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: var(--primary-glow);
+            color: white;
+            box-shadow: 0 10px 25px rgba(249, 115, 22, 0.3);
+        }
+
+        footer {
+            padding: 4rem 5%;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* --- RESPONSIVE MEDIA QUERIES --- */
+
+        /* Laptopok és kisebb monitorok */
+        @media (max-width: 1200px) {
+            h1 { font-size: 4.2rem; }
+            .bento-grid { gap: 1.2rem; }
+            .bento-card { padding: 2rem; }
+        }
+
+        /* Tabletek (iPad, nagyobb kijelzős eszközök) */
+        @media (max-width: 1024px) {
+            nav { padding: 1.2rem 4%; }
+            h1 { font-size: 3.8rem; }
+            .bento-grid { grid-template-columns: repeat(2, 1fr); }
+            .bento-card.wide { grid-column: span 2; }
+            .google-section { grid-template-columns: 1fr; gap: 2.5rem; }
+            .google-info { padding-right: 0; }
+            .map-container { height: 400px; }
+            .contact-container { padding: 3rem; }
+        }
+
+        /* Kisebb tabletek és nagyobb mobilok */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1.2rem 1rem;
+                text-align: center;
+            }
+            .logo { order: 1; width: 100%; }
+            .nav-phone-center { order: 2; width: 100%; margin: 0.2rem 0; }
+            .nav-links { order: 3; justify-content: center; width: 100%; gap: 1.2rem; }
+            
+            .hero { padding-top: 12rem; }
+            h1 { font-size: 3rem; letter-spacing: -1px; }
+            .hero-subtitle { font-size: 1.1rem; }
+            
+            .contact-top-bar {
+                width: 100%;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 0.5rem;
+                padding: 1.2rem;
+            }
+
+            .section { padding: 4rem 4%; }
+            .section-title { font-size: 2rem; margin-bottom: 2rem; }
+            
+            .bento-grid { grid-template-columns: 1fr; }
+            .bento-card.wide { grid-column: span 1; }
+            
+            .contact-container { padding: 2rem 1.5rem; border-radius: 24px; }
+            .reviews-btn { width: 100%; }
+        }
+
+        /* Kis kijelzős mobiltelefonok */
+        @media (max-width: 480px) {
+            h1 { font-size: 2.4rem; }
+            .phone-cta { font-size: 1rem; padding: 0.5rem 1rem; }
+            .badge { font-size: 0.75rem; padding: 0.5rem 0.8rem; }
+            .bento-card { padding: 1.8rem 1.5rem; }
+            .map-container { height: 300px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ambient-glow"></div>
+    <div class="ambient-glow-2"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo" id="nav-logo">VILLANYSZERELÉS</div>
+        
+        <!-- Kattintható mobil-optimalizált telefonszám -->
+        <div class="nav-phone-center">
+            <a href="tel:+36706120461" class="phone-cta">
+                <span class="phone-icon-pulse">📞</span>
+                <span>+36 70 612 0461</span>
+            </a>
+        </div>
+
+        <div class="nav-links">
+            <a href="#services" id="link-services">Szolgáltatások</a>
+            <a href="#google" id="link-reviews">Vélemények</a>
+            <a href="#contact" id="link-contact">Kapcsolat</a>
+            <button class="lang-switch" onclick="toggleLanguage()" id="lang-btn">EN</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="badge" id="hero-badge">HITELLESÍTETT KIVITELEZÉS • 100% GARANCIA & TRANSZPARENS ELSZÁMOLÁS</div>
+        <h1 id="hero-title">VILLANYSZERELÉS<br><span>Kompromisszumok nélkül.</span></h1>
+        <p class="hero-subtitle" id="hero-sub">Fajth Roland EV — Kompromisszummentes villanyszerelés és épületautomatizálás a tervezéstől a prémium szerelvényezésig. Kiszámítható, számlaképes, biztonságra tervezett struktúrák.</p>
+        
+        <!-- Rugalmas, reszponzív kontakt kártya -->
+        <div class="contact-top-bar">
+            <span>Fajth Roland EV</span>
+            <a href="tel:+36706120461">+36 70 612 0461</a>
+        </div>
+    </section>
+
+    <!-- Bento Grid Services Section -->
+    <section class="section" id="services">
+        <div class="section-title" id="services-title">Szolgáltatások</div>
+        <div class="bento-grid">
+            <div class="bento-card wide">
+                <div class="card-icon">🏠</div>
+                <h3 id="s1-title">Épületautomatizálás</h3>
+                <p id="s1-desc">Jövőbiztos elektromos hálózatok integrációja. Világítási képek, fűtés-hűtés rendszerek és energiamenedzsment összehangolása modern okosotthon megoldásokkal.</p>
+            </div>
+            <div class="bento-card">
+                <div class="card-icon">🔋</div>
+                <h3 id="s2-title">Autótöltő telepítése</h3>
+                <p id="s2-desc">Elektromos autó (EV) töltőállomások professzionális és szabványos telepítése otthonában vagy munkahelyén, intelligens terhelésmegosztással.</p>
+            </div>
+            <div class="bento-card">
+                <div class="card-icon">⚡</div>
+                <h3 id="s3-title">Fi-Relé beépítése cseréje</h3>
+                <p id="s3-desc">Modern áram-védőkapcsolók precíziós integrációja és cseréje az azonnali élet- és érintésvédelem biztosítása érdekében.</p>
+            </div>
+            <div class="bento-card wide">
+                <div class="card-icon">🛡️</div>
+                <h3 id="s4-title">Túlfeszültségvédelem beépítése</h3>
+                <p id="s4-desc">Többszintű védelmi rendszerek kiépítése az értékes elektronikai eszközök, háztartási gépek és a teljes hálózat abszolút biztonságáért.</p>
+            </div>
+            <div class="bento-card">
+                <div class="card-icon">🎥</div>
+                <h3 id="s5-title">Kamerarendszerek</h3>
+                <p id="s5-desc">Nagy felbontású IP kamerarendszerek szakszerű tervezése és kiépítése távoli eléréssel és intelligens megfigyelési funkciókkal.</p>
+            </div>
+            <div class="bento-card">
+                <div class="card-icon">🔐</div>
+                <h3 id="s6-title">Beléptetőrendszerek</h3>
+                <p id="s6-desc">Intelligens kaputelefonok, kulcsmentes, kódos vagy okostelefon-alapú beléptetőrendszerek integrálása a maximális kontrollért.</p>
+            </div>
+            <div class="bento-card wide">
+                <div class="card-icon">🆘</div>
+                <h3 id="s7-title">Hibaelhárítás</h3>
+                <p id="s7-desc">Kritikus hálózati hibák és váratlan leállások gyors, precíziós diagnosztikája és azonnali, hatékony megszüntetése.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Google My Business & Maps Section -->
+    <section class="section" id="google">
+        <div class="google-section">
+            <div class="google-info">
+                <div class="rating-box" id="google-rating-text">★ 5.0 Google Értékelések</div>
+                <h2 class="section-title" style="margin-bottom: 1.5rem;" id="google-title">Ügyfélközpontú Minőség, Igazolva</h2>
+                <p style="color: var(--text-muted); line-height: 1.8; font-size: 1.1rem;" id="google-desc">
+                    A legfontosabb mérőszám a partnereim elégedettsége. Tekintse meg a hitelesített Google értékeléseket, vagy látogasson el a profilomra, ahol transzparens véleményeket olvashat a munkáim pontosságáról és minőségéről Diósdon és környékén.
+                </p>
+                <a href="https://www.google.hu/maps/place/Villanyszerel%C3%A9s+Fajth+Roland+E.V./@47.4104759,18.9306272,15z/data=!4m10!1m2!2m1!1svillanyszerel%C3%A9s+di%C3%B3sd!3m6!1s0x4741e152ef5c412f:0x5b3adc0594ffa6e8!8m2!3d47.4104786!4d18.9450399!15sChd2aWxsYW55c3plcmVsw6lzIGRpw7NzZFoZIhd2aWxsYW55c3plcmVsw6lzIGRpw7NzZJIBC2VsZWN0cmljaWFumgFEQ2k5RFFVbFJRVU52WkVOb2RIbGpSamx2VDIxYVFtUXdVa1pXTVZKRVRrUktiMWg2YkhKVE1FNVRZMVZHYUZveFJSQULgAQD6AQQIABBE!16s%2Fg%2F11yp3x9yqm?entry=ttu&g_ep=EgoyMDI2MDYyMS4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="reviews-btn" id="btn-reviews">Vélemények megtekintése</a>
+            </div>
+            
+            <div class="map-container">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2698.815340625624!2d18.942464977196025!3d47.41047857116499!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4741e152ef5c412f%3A0x5b3adc0594ffa6e8!2sVillanyszerel%C3%A9s%20Fajth%20Roland%20E.V.!5e0!3m2!1shu!2shu!4v1719225000000!5m2!1shu!2shu" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section class="section" id="contact">
+        <div class="section-title" style="text-align: center;" id="contact-title">Írj nekem üzenetet</div>
+        <div class="contact-container">
+            <form action="#" method="POST" onsubmit="event.preventDefault(); alert('Üzenet elküldve! / Message sent!');">
+                <div class="form-group">
+                    <label for="name" id="lbl-name">NÉV</label>
+                    <input type="text" id="name" required placeholder="Az Ön neve">
+                </div>
+                <div class="form-group">
+                    <label for="email" id="lbl-email">E-MAIL CÍM</label>
+                    <input type="email" id="email" required placeholder="pelda@domain.com">
+                </div>
+                <div class="form-group">
+                    <label for="phone" id="lbl-phone">TELEFONSZÁM</label>
+                    <input type="tel" id="phone" placeholder="+36 70 123 4567">
+                </div>
+                <div class="form-group">
+                    <label for="message" id="lbl-msg">ÜZENET / PROJEKT LEÍRÁSA</label>
+                    <textarea id="message" rows="5" required placeholder="Miben segíthetek?"></textarea>
+                </div>
+                <button type="submit" class="submit-btn" id="btn-submit">Üzenet Küldése</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 Fajth Roland E.V. Minden jog fenntartva. | High-End Electrical Engineering.</p>
+    </footer>
+
+    <!-- Transitions & Language Logic Script -->
+    <script>
+        const sections = document.querySelectorAll('.section');
+        const observerOptions = {
+            root: null,
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // Multilingual Logic (HU / EN)
+        let currentLang = 'HU';
+        const data = {
+            HU: {
+                logo: "VILLANYSZERELÉS",
+                badge: "HITELLESÍTETT KIVITELEZÉS • 100% GARANCIA & TRANSZPARENS ELSZÁMOLÁS",
+                title: "VILLANYSZERELÉS<br><span>Kompromisszumok nélkül.</span>",
+                sub: "Fajth Roland EV — Kompromisszummentes villanyszerelés és épületautomatizálás a tervezéstől a prémium szerelvényezésig. Kiszámítható, számlaképes, biztonságra tervezett struktúrák.",
+                services: "Szolgáltatások", reviews: "Vélemények", contact: "Kapcsolat",
+                stitle: "Szolgáltatások",
+                s1t: "Épületautomatizálás", s1d: "Jövőbiztos elektromos hálózatok integrációja. Világítási képek, fűtés-hűtés rendszerek és energiamenedzsment összehangolása modern okosotthon megoldásokkal.",
+                s2t: "Autótöltő telepítése", s2d: "Elektromos autó (EV) töltőállomások professzionális és szabványos telepítése otthonában vagy munkahelyén, intelligens terhelésmegosztással.",
+                s3t: "Fi-Relé beépítése cseréje", s3d: "Modern áram-védőkapcsolók precíziós integrációja és cseréje az azonnali élet- és érintésvédelem biztosítása érdekében.",
+                s4t: "Túlfeszültségvédelem beépítése", s4d: "Többszintű védelmi rendszerek kiépítése az értékes elektronikai eszközök, háztartási gépek és a teljes hálózat abszolút biztonságáért.",
+                s5t: "Kamerarendszerek", s5d: "Nagy felbontású IP kamerarendszerek szakszerű tervezése és kiépítése távoli eléréssel és intelligens megfigyelési funkciókkal.",
+                s6t: "Beléptetőrendszerek", s6d: "Intelligens kaputelefonok, kulcsmentes, kódos vagy okostelefon-alapú beléptetőrendszerek integrálása a maximális kontrollért.",
+                s7t: "Hibaelhárítás", s7d: "Kritikus hálózati hibák és váratlan leállások gyors, precíziós diagnosztikája és azonnali, hatékony megszüntetése.",
+                grating: "★ 5.0 Google Értékelések",
+                gtitle: "Ügyfélközpontú Minőség, Igazolva", gdesc: "A legfontosabb mérőszám a partnereim elégedettsége. Tekintse meg a hitelesített Google értékeléseket, vagy látogasson el a profilomra, ahol transzparens véleményeket olvashat a munkáim pontosságáról és minőségéről Diósdon és környékén.",
+                gbtn: "Vélemények megtekintése", ctitle: "Írj nekem üzenetet",
+                lname: "NÉV", lemail: "E-MAIL CÍM", lphone: "TELEFONSZÁM", lmsg: "ÜZENET / PROJEKT LEÍRÁSA", bsubmit: "Üzenet Küldése"
+            },
+            EN: {
+                logo: "ELECTRICAL SERVICES",
+                badge: "VERIFIED ENGINEERING • 100% WARRANTY & TRANSPARENT BILLING",
+                title: "ELECTRICAL SERVICES<br><span>Without compromises.</span>",
+                sub: "Roland Fajth EV — Uncompromising electrical installations and building automation from the drawing board to premium finishes. Reliable, fully licensed, and architected for ultimate safety.",
+                services: "Services", reviews: "Reviews", contact: "Contact",
+                stitle: "Services",
+                s1t: "Building Automation", s1d: "Integration of future-proof electrical grids. Seamless orchestration of lighting scenes, HVAC, and energy management paired with modern smart home systems.",
+                s2t: "EV Charger Installation", s2d: "Professional and compliant installation of electric vehicle (EV) charging stations for residential and commercial properties with smart dynamic load balancing.",
+                s3t: "RCD / FI-Relay Installation & Replacement", s3d: "Precision integration and replacement of modern residual current devices (RCD) to guarantee immediate shock and life safety protection.",
+                s4t: "Surge Protection Installation", s4d: "Deployment of multi-level surge protection devices (SPD) engineered for the absolute safety of your valuable electronics, appliances, and grid infrastructure.",
+                s5t: "Camera Systems", s5d: "Expert planning and deployment of high-definition IP surveillance networks featuring secure remote access and intelligent monitoring capabilities.",
+                s6t: "Access Control Systems", s6d: "Integration of smart intercoms and keyless, pin-code or smartphone-driven access control systems for maximum security and entry control.",
+                s7t: "Troubleshooting", s7d: "Rapid diagnostics and highly effective resolution of critical grid failures, electrical faults, and unexpected system blackouts.",
+                grating: "★ 5.0 Google Reviews",
+                gtitle: "Client-Centric Quality, Verified", gdesc: "The ultimate metric is the satisfaction of my partners. View verified Google reviews or visit my business profile to read transparent feedback on my precision and performance in Diósd and the surrounding areas.",
+                gbtn: "View Google Reviews", ctitle: "Send me a message",
+                lname: "FULL NAME", lemail: "EMAIL ADDRESS", lphone: "PHONE NUMBER", lmsg: "MESSAGE / PROJECT DETAILS", bsubmit: "Send Message"
+            }
+        };
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'HU' ? 'EN' : 'HU';
+            document.getElementById('lang-btn').innerText = currentLang === 'HU' ? 'EN' : 'HU';
+            
+            document.getElementById('nav-logo').innerText = data[currentLang].logo;
+            document.getElementById('hero-badge').innerText = data[currentLang].badge;
+            document.getElementById('hero-title').innerHTML = data[currentLang].title;
+            document.getElementById('hero-sub').innerText = data[currentLang].sub;
+            document.getElementById('link-services').innerText = data[currentLang].services;
+            document.getElementById('link-reviews').innerText = data[currentLang].reviews;
+            document.getElementById('link-contact').innerText = data[currentLang].contact;
+            document.getElementById('services-title').innerText = data[currentLang].stitle;
+            
+            document.getElementById('s1-title').innerText = data[currentLang].s1t;
+            document.getElementById('s1-desc').innerText = data[currentLang].s1d;
+            document.getElementById('s2-title').innerText = data[currentLang].s2t;
+            document.getElementById('s2-desc').innerText = data[currentLang].s2d;
+            document.getElementById('s3-title').innerText = data[currentLang].s3t;
+            document.getElementById('s3-desc').innerText = data[currentLang].s3d;
+            document.getElementById('s4-title').innerText = data[currentLang].s4t;
+            document.getElementById('s4-desc').innerText = data[currentLang].s4d;
+            document.getElementById('s5-title').innerText = data[currentLang].s5t;
+            document.getElementById('s5-desc').innerText = data[currentLang].s5d;
+            document.getElementById('s6-title').innerText = data[currentLang].s6t;
+            document.getElementById('s6-desc').innerText = data[currentLang].s6d;
+            document.getElementById('s7-title').innerText = data[currentLang].s7t;
+            document.getElementById('s7-desc').innerText = data[currentLang].s7d;
+
+            document.getElementById('google-rating-text').innerText = data[currentLang].grating;
+            document.getElementById('google-title').innerText = data[currentLang].gtitle;
+            document.getElementById('google-desc').innerText = data[currentLang].gdesc;
+            document.getElementById('btn-reviews').innerText = data[currentLang].gbtn;
+            document.getElementById('contact-title').innerText = data[currentLang].ctitle;
+
+            document.getElementById('lbl-name').innerText = data[currentLang].lname;
+            document.getElementById('lbl-email').innerText = data[currentLang].lemail;
+            document.getElementById('lbl-phone').innerText = data[currentLang].lphone;
+            document.getElementById('lbl-msg').innerText = data[currentLang].lmsg;
+            document.getElementById('btn-submit').innerText = data[currentLang].bsubmit;
+        }
+    </script>
+</body>
+</html>
