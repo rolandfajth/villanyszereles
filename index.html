@@ -155,7 +155,7 @@
         .phone-cta {
             display: inline-flex;
             align-items: center;
-            gap: 0.6rem;
+            gap: 0.7rem;
             color: white;
             text-decoration: none;
             font-weight: 600;
@@ -180,15 +180,17 @@
             box-shadow: 0 0 25px rgba(249, 115, 22, 0.5);
         }
 
+        /* INTENZÍVEBBEN PULZÁLÓ TELEFON IKON */
         .phone-icon-pulse {
             color: var(--primary-glow);
             display: inline-block;
-            animation: phoneShake 0.5s infinite alternate;
+            animation: phoneShakeAndGrow 1.2s infinite ease-in-out alternate;
         }
 
-        @keyframes phoneShake {
-            0% { transform: rotate(-10deg); }
-            100% { transform: rotate(10deg); }
+        @keyframes phoneShakeAndGrow {
+            0% { transform: rotate(-12deg) scale(1); }
+            50% { transform: rotate(12deg) scale(1.35); filter: drop-shadow(0 0 8px var(--primary-glow)); }
+            100% { transform: rotate(-12deg) scale(1); }
         }
 
         .nav-right {
@@ -229,7 +231,7 @@
             font-weight: 600;
         }
 
-        /* HAMBURGER IKON - Alapból rejtve */
+        /* HAMBURGER IKON */
         .hamburger-menu {
             display: none;
             flex-direction: column;
@@ -263,7 +265,7 @@
             position: relative;
         }
 
-        /* MÓDOSÍTOTT JELVÉNY: Kicsit nagyobb és hangsúlyosabb */
+        /* JELVÉNY */
         .badge {
             align-self: flex-start;
             background: rgba(249, 115, 22, 0.1);
@@ -287,7 +289,6 @@
             margin-bottom: 1.5rem;
         }
 
-        /* MÓDOSÍTOTT ALCÍM EXPRESSZIÓ: Kisebb, mint a főszó */
         h1 span {
             font-size: 0.75em;
             display: block;
@@ -305,17 +306,15 @@
             margin-bottom: 2.5rem;
         }
 
+        /* TOP CONTACT BAR ESZTÉTIKUS MULTILINE TÁMOGATÁSSAL */
         .contact-top-bar {
             align-self: flex-start;
-            font-size: 1.4rem;
-            font-weight: 600;
-            color: var(--text-main);
-            display: inline-flex;
-            gap: 1.5rem;
-            align-items: center;
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
             background: var(--card-bg);
             border: 1px solid var(--border-color);
-            padding: 1rem 2rem;
+            padding: 1.2rem 2.2rem;
             border-radius: 20px;
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
@@ -328,9 +327,37 @@
             transform: translateY(-2px);
         }
 
-        .contact-top-bar a {
+        .contact-top-bar-row-top {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 1.5rem;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .contact-top-bar-row-top a {
             color: var(--primary-glow);
             text-decoration: none;
+        }
+
+        .contact-top-bar-row-bottom {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-align: left;
+        }
+
+        .contact-top-bar-row-bottom a {
+            color: var(--primary-glow);
+            text-decoration: underline;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .contact-top-bar-row-bottom a:hover {
+            color: white;
         }
 
         /* Bento Grid Services Section */
@@ -400,7 +427,7 @@
         /* Google Section */
         .google-section {
             display: grid;
-            grid-template-columns: 1fr 1.2fr;
+            grid-template-columns: 1.2fr 1fr;
             gap: 3rem;
             align-items: center;
         }
@@ -430,6 +457,176 @@
             transition: all 0.3s;
             box-shadow: 0 10px 20px rgba(249, 115, 22, 0.2);
             text-align: center;
+        }
+
+        /* FANCY SLIDER STÍLUSOK */
+        .reviews-slider-container {
+            position: relative;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 2.5rem;
+            min-height: 330px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .slider-wrapper {
+            position: relative;
+            height: 100%;
+            width: 100%;
+        }
+
+        .review-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            opacity: 0;
+            transform: translateX(30px);
+            transition: all 0.5s ease-in-out;
+            pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .review-slide.active {
+            opacity: 1;
+            transform: translateX(0);
+            pointer-events: auto;
+            position: relative;
+        }
+
+        .reviewer-header-block {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            width: 100%;
+        }
+
+        .reviewer-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .reviewer-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: white;
+            text-transform: uppercase;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            flex-shrink: 0;
+        }
+
+        .avatar-a { background-color: #ea4335; }
+        .avatar-b { background-color: #4285f4; }
+        .avatar-f { background-color: #fabc05; }
+        .avatar-p { background-color: #34a853; }
+        .avatar-m { background-color: #673ab7; }
+        .avatar-r { background-color: #00bfb2; }
+        .avatar-l { background-color: #e91e63; }
+        .avatar-n { background-color: #ff5722; }
+        .avatar-s { background-color: #009688; }
+
+        .reviewer-details h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-main);
+            text-align: left;
+        }
+
+        .reviewer-sub-info {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 0.15rem;
+            text-align: left;
+        }
+
+        .review-date {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            white-space: nowrap;
+        }
+
+        .google-stars-row {
+            display: flex;
+            gap: 2px;
+            margin-top: 0.2rem;
+        }
+
+        .google-star-svg {
+            width: 16px;
+            height: 16px;
+            fill: #ffc107;
+        }
+
+        .review-text {
+            color: var(--text-muted);
+            line-height: 1.6;
+            font-size: 1rem;
+            font-style: italic;
+            text-align: left;
+        }
+
+        .slider-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding-top: 1rem;
+        }
+
+        .slider-arrow {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            color: white;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .slider-arrow:hover {
+            background: rgba(249, 115, 22, 0.2);
+            border-color: var(--primary-glow);
+        }
+
+        .slider-dots {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .slider-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.15);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .slider-dot.active {
+            background: var(--primary-glow);
+            width: 18px;
+            border-radius: 4px;
         }
 
         .map-container {
@@ -488,7 +685,6 @@
             border-color: var(--primary-glow);
         }
 
-        /* Adatvédelmi Checkbox */
         .privacy-group {
             display: flex;
             align-items: flex-start;
@@ -537,7 +733,6 @@
             color: white;
         }
 
-        /* Formspree visszajelző elemek stílusa */
         .fs-status-msg {
             display: none;
             font-weight: 600;
@@ -641,7 +836,7 @@
             border-color: var(--primary-glow);
         }
 
-        /* --- STABIL RESZPONZÍV MEDIA QUERIES --- */
+        /* RESZPONZÍV MEDIA QUERIES */
         @media (max-width: 1024px) {
             nav {
                 display: flex;
@@ -701,7 +896,6 @@
                 transform: translateY(-50%);
             }
 
-            /* TELJES KÉPERNYŐS MENÜ OVERLAY MOBILON */
             .nav-links.mobile-open {
                 display: flex;
                 flex-direction: column;
@@ -735,7 +929,6 @@
                 scroll-margin-top: 140px; 
             }
 
-            /* MOBIL TIPOGRÁFIA: Az arányok megtartása telefonon is */
             .hero { padding-top: 6rem; min-height: auto; padding-bottom: 3rem; text-align: center; align-items: center;}
             .badge { align-self: center; text-align: center; font-size: 0.95rem; }
             h1 { font-size: 2.3rem; letter-spacing: -1px; margin-bottom: 1rem; }
@@ -747,12 +940,14 @@
                 width: 100%;
                 flex-direction: column;
                 align-items: center;
-                gap: 0.3rem;
-                padding: 0.8rem;
+                gap: 0.4rem;
+                padding: 1rem;
                 font-size: 1.1rem;
                 border-radius: 14px;
                 align-self: center;
             }
+            .contact-top-bar-row-top { font-size: 1.2rem; justify-content: center; gap: 0.8rem; }
+            .contact-top-bar-row-bottom { font-size: 0.85rem; text-align: center; }
 
             .section { padding: 3.5rem 4%; text-align: center; }
             .section-title { font-size: 1.8rem; margin-bottom: 1.5rem; text-align: center; }
@@ -775,6 +970,7 @@
             .google-section { grid-template-columns: 1fr; gap: 2rem; }
             .rating-box { font-size: 0.85rem; padding: 0.4rem 0.8rem; margin-bottom: 1rem; align-self: center; }
             .reviews-btn { width: 100%; padding: 1rem; font-size: 1rem; margin-top: 1rem; }
+            .reviews-slider-container { min-height: 360px; padding: 1.5rem 1rem; }
             .map-container { height: 280px; border-radius: 20px; }
             
             .contact-container { padding: 2rem 1.2rem; border-radius: 20px; }
@@ -830,11 +1026,17 @@
         <div class="badge" id="hero-badge">ahogy működnie kell</div>
         <h1 id="hero-title">VILLANYSZERELÉS<br><span>Villany? Bekapcsolva. <br> Hiba? Kikapcsolva.</span></h1>
         
-        <p class="hero-subtitle" id="hero-sub">Precíz villanyszerelés és modern épületautomatizálás a budai régióban. Megbízható, számlaképes szakember Diósdon, Törökbálinton és Budaörsön – biztonságerős elektromos hálózatok és okos vezérlések kivitelezése.</p>
+        <p class="hero-subtitle" id="hero-sub">Precíz villanyszerelés és modern épületautomatizálás a budai régióban. Megbízható, számlaképes szakember Diósdon, Törökbálinton és Budaörsön – biztonságra tervezett elektromos hálózatok és intelligens vezérlések kivitelezése.</p>
         
+        <!-- MÓDOSÍTOTT CONTACT TOP BAR LOXONE SILVER PARTNER LINKELÉSSEL -->
         <div class="contact-top-bar">
-            <span>Fajth Roland EV</span>
-            <a href="tel:+36706120461">+36 70 612 0461</a>
+            <div class="contact-top-bar-row-top">
+                <span>Fajth Roland EV</span>
+                <a href="tel:+36706120461">+36 70 612 0461</a>
+            </div>
+            <div class="contact-top-bar-row-bottom" id="hero-partner-row">
+                <a href="https://www.loxone.com/int/commercial/building-automation/" target="_blank" rel="noopener">Loxone Silver Partner</a>
+            </div>
         </div>
     </header>
 
@@ -846,7 +1048,8 @@
                 <article class="bento-card wide">
                     <div class="card-icon" aria-hidden="true">🏠</div>
                     <h3 id="s1-title">Épületautomatizálás</h3>
-                    <p id="s1-desc">Jövőbiztos elektromos hálózatok integrációja. Mint minősített Loxone partner vállalom okosotthon rendszerek, világítási képek, fűtés-hűtés és energiamenedzsment komplett programozását és kivitelezését Diósd és Buda környékén.</p>
+                    <!-- MÓDOSÍTOTT TARTALOM: Loxone Silver Partner -->
+                    <p id="s1-desc">Jövőbiztos elektromos hálózatok integrációja. Mint Loxone Silver Partner vállalom okosotthon rendszerek, világítási képek, fűtés-hűtés és energiamenedzsment komplett programozását és kivitelezését Diósd és Buda környékén.</p>
                 </article>
                 <article class="bento-card">
                     <div class="card-icon" aria-hidden="true">🔋</div>
@@ -873,7 +1076,6 @@
                     <h3 id="s6-title">Beléptetőrendszerek</h3>
                     <p id="s6-desc">Intelligens kaputelefonok, kulcsmentes, kódos, modern NFC vagy okostelefon-alapú beléptetőrendszerek integrálása.</p>
                 </article>
-                <!-- MÓDOSÍTOTT: bento-card wide helyett bento-card -->
                 <article class="bento-card">
                     <div class="card-icon" aria-hidden="true">🆘</div>
                     <h3 id="s7-title">Hibaelhárítás</h3>
@@ -882,16 +1084,25 @@
             </div>
         </section>
 
-        <!-- GOOGLE MAPS -->
+        <!-- GOOGLE MAPS & FANCY SLIDER -->
         <section class="section" id="google" aria-labelledby="google-title">
             <div class="google-section">
                 <div class="google-info">
                     <div class="rating-box" id="google-rating-text">★ 5.0 Google Értékelések</div>
                     <h2 class="section-title" style="margin-bottom: 1.5rem;" id="google-title">Korrekt munka. Valódi minőség.</h2>
-                    <p style="color: var(--text-muted); line-height: 1.8; font-size: 1.1rem;" id="google-desc">
-                        Ha precíz és tapasztalt villanyszerelő szakembert keres Diósd, Törökbálint vagy Budaörs környékén, a legfontosabb mérőszám a partnereim elégedettsége. Tekintse meg a hitelesített Google értékeléseket, ahol transzparens véleményeket olvashat a munkáim minőségéről.
-                    </p>
-                    <a href="https://www.google.hu/maps/place/Villanyszerel%C3%A9s+Fajth+Roland+E.V./@47.4104759,18.9306272,15z/data=!4m10!1m2!2m1!1svillanyszerel%C3%A9s+di%C3%B3sd!3m6!1s0x4741e152ef5c412f:0x5b3adc0594ffa6e8!8m2!3d47.4104786!4d18.9450399!15sChd2aWxsYW55c3plcmVsw6lzIGRpw7NzZFoZIhd2aWxsYW55c3plcmVsw6lzIGRpw7NzZJIBC2VsZWN0cmljaWFumgFEQ2k5RFFVbFJRVU52WkVOb2RIbGpSamx2VDIxYVFtUXdVa1pXTVZKRVRrUktiMWg2YkhKVE1FNVRZMVZHYUZveFJSQULgAQD6AQQIABBE!16s%2Fg%2F11yp3x9yqm?entry=ttu&g_ep=EgoyMDI2MDYyMS4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="reviews-btn" id="btn-reviews" rel="noopener">Vélemények megtekintése</a>
+                    
+                    <div class="reviews-slider-container">
+                        <div class="slider-wrapper" id="slider-wrapper">
+                            <!-- A JavaScript fogja dinamikusan feltölteni -->
+                        </div>
+                        <div class="slider-controls">
+                            <button class="slider-arrow" onclick="prevSlide()" aria-label="Előző vélemény">←</button>
+                            <div class="slider-dots" id="slider-dots"></div>
+                            <button class="slider-arrow" onclick="nextSlide()" aria-label="Következő vélemény">→</button>
+                        </div>
+                    </div>
+
+                    <a href="https://www.google.hu/maps/place/Villanyszerel%C3%A9s+Fajth+Roland+E.V./@47.4104759,18.9306272,15z/data=!4m10!1m2!2m1!1svillanyszerel%C3%A9s+di%C3%B3sd!3m6!1s0x4741e152ef5c412f:0x5b3adc0594ffa6e8!8m2!3d47.4104786!4d18.9450399!15sChd2aWxsYW55c3plcmVsw6lzIGRpw7NzZFoZIhd2aWxsYW55c3plcmVsw6lzIGRpw7NzZJIBC2VsZWN0cmljaWFumgFEQ2k5RFFVbFJRVU52WkVOb2RIbGpSamx2VDIxYVFtUXdVa1pXTVZJRVRrUktiMWg2YkhKVE1FNVRZMVZHYUZveFJSQULgAQD6AQQIABBE!16s%2Fg%2F11yp3x9yqm?entry=ttu&g_ep=EgoyMDI2MDYyMS4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="reviews-btn" id="btn-reviews" rel="noopener">Vélemények megtekintése a Google-on</a>
                 </div>
                 
                 <div class="map-container">
@@ -906,9 +1117,8 @@
             </div>
         </section>
 
-        <!-- CONTACT (FORMSPREE INTEGRÁCIÓVAL VÉGLEGESSÉ TÉVE) -->
+        <!-- CONTACT -->
         <section class="section" id="contact" aria-labelledby="contact-title">
-            <!-- MÓDOSÍTOTT: Írj nekem üzenetet helyett írjon nekem üzenetet -->
             <h2 class="section-title" style="text-align: center;" id="contact-title">írjon nekem üzenetet</h2>
             <div class="contact-container">
                 
@@ -927,7 +1137,6 @@
                     </div>
                     <div class="form-group">
                         <label for="message" id="lbl-msg">ÜZENET / PROJEKT LEÍRÁSA</label>
-                        <!-- MÓDOSÍTOTT: placeholder-ből törölve a plusz kérdés -->
                         <textarea id="message" name="message" rows="5" required placeholder="Miben segíthetek?" data-fs-field></textarea>
                     </div>
                     
@@ -940,7 +1149,6 @@
 
                     <button type="submit" class="submit-btn" id="btn-submit" data-fs-submit-btn>Üzenet Küldése</button>
                     
-                    <!-- Formspree státuszüzenetek -->
                     <div id="fs-success" data-fs-success class="fs-status-msg" style="color: #22c55e;">Köszönjük! Az üzenetet sikeresen elküldtük.</div>
                     <div id="fs-error" data-fs-error class="fs-status-msg" style="color: #ef4444;">Hiba történt a küldés során. Kérjük, próbálja meg újra!</div>
                 </form>
@@ -949,7 +1157,7 @@
     </main>
 
     <!-- FOOTER -->
-    <footer>
+    <footer id="footer-text">
         <p>© 2026 Fajth Roland E.V. Minden jog fenntartva. | Villanyszerelés Diósd, Budaörs, Törökbálint és Buda környékén. Hivatalos Loxone Partner.</p>
         <div class="footer-links">
             <span onclick="openPrivacyModal()" id="footer-privacy-link">Adatvédelmi tájékoztató</span>
@@ -983,7 +1191,7 @@
     <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 
     <script>
-        // Hamburger overlay kezelés (Mobilon/tableten hívódik meg)
+        // Hamburger overlay kezelés
         const hamburgerBtn = document.getElementById('hamburger-btn');
         const navMenu = document.getElementById('nav-menu');
         const navRightBox = document.getElementById('nav-right-box');
@@ -1047,62 +1255,152 @@
         }, observerOptions);
         sections.forEach(section => observer.observe(section));
 
-        // Multilingual Pack (HU / EN)
+        // 100%-BAN VALÓDI GOOGLE VÉLEMÉNYEK ADATBÁZISA
         let currentLang = 'HU';
+        
+        const googleReviewsData = {
+            HU: [
+                { name: "András Tóth", letter: "A", class: "avatar-a", meta: "Helyi idegenvezető · 19 vélemény · 1 fotó", time: "6 hónapja", text: "Jó ár-érték arány, gyors és minőségi munka!" },
+                { name: "Balázs Deák", letter: "B", class: "avatar-b", meta: "5 vélemény", time: "egy hónapja", text: "Kiváló szakember, nagyon elégedett vagyok az elvégzett munkájával." },
+                { name: "Petra Farkas", letter: "P", class: "avatar-p", meta: "4 vélemény", time: "6 hónapja", text: "Roland egy autótöltőt telepített nálunk, és maximálisan elégedettek vagyunk a munkájával. Precízen dolgozott, korrekt áron vállalta a feladatot, és még rendet is hagyott maga után. Szívből ajánlom!" },
+                { name: "Anna Sarolta Poszmik", letter: "A", class: "avatar-f", meta: "1 vélemény", time: "7 hónapja", text: "A helyszíni felmérést követően szakszerűen és gyorsan cserélte ki az ingatlan elavult biztosítéktábláját egy korszerű, érintésvédelmi szempoldból is biztonságos rendszerre. Munkavégzése rendezett. Roland szolgáltatásait jó szívvel ajánlom mindenkinek, aki megbízható és magas színvonalú villanyszerelői munkát keres." },
+                { name: "Márton Varga", letter: "M", class: "avatar-m", meta: "Helyi idegenvezető · 17 vélemény · 2 fotó", time: "7 hónapja", text: "A megbeszélt időpontban jöttek, korrekten elvégezték a munkát és még rendet is hagytak maguk után. Ritka manapság az ilyen szakember!" },
+                { name: "Rufina Rózsa", letter: "R", class: "avatar-r", meta: "8 vélemény · 4 fotó", time: "3 hónapja", text: "Fiatal, nagyon ügyes villanyszerelő! Pontosan érkezett, gyorsan felmérte a problémát, és profi módon meg is oldotta. Látszik rajta, hogy ért a munkájához, ráadásul nagyon korrekt és segítőkész volt végig. Az ár is teljesen rendben volt. Nyugodt szívvel ajánlom bárkinek!" },
+                { name: "Magdolna Nagy", letter: "N", class: "avatar-n", meta: "Helyi idegenvezető · 13 vélemény · 3 fotó", time: "7 hónapja", text: "Minőségi, gyors és precíz munka magasan képzett és professzionális hozzáállás, betartva a kért határidőket." },
+                { name: "Luca Petz", letter: "L", class: "avatar-l", meta: "5 vélemény · 3 fotó", time: "7 hónapja", text: "Teljes mértékben elégedett vagyok. Bátran ajánlom bárkinek Rolandot. Fiatal, pontos, gyors. Azonnal válaszolt minden üzenetemre. 😊" },
+                { name: "Mónika Szabó", letter: "M", class: "avatar-m", meta: "4 vélemény", time: "4 hónapja", text: "Roland pontos, precíz hozzáállásával, szakértelmével be tudta szerelni az új kaputelefont, amely munka elöl sok más szakember futott már el korábban. Roland a megoldást kereste és meg is találta. Megbízható, kedves fiatalember, aki nagyon szereti, amit csinál. Nagyon hálásak vagyunk, hogy megtaláltuk Őt. Teljes szívemből tudom ajánlani, villanyszerelésből, kaputelefonszerelésből csillagos 10-es." },
+                { name: "Szabó Máté", letter: "S", class: "avatar-s", meta: "2 vélemény", time: "3 hónapja", text: "Budapesten és Diósdon is dolgozott nálunk. Precízen és megbízhatóan dolgozott. Amikorra ígérte, hogy jön, pontosan megérkezett. Telefonon elérhető volt. A kaputelefonunkat cserélte. Nem volt egyszerű, de kitartó volt és ügyesen meg tudta csinálni. Gyorsan dolgozik, ár-érték arányban nagyon jó. Ajánlom mindenkinek!" }
+            ],
+            EN: [
+                { name: "András Tóth", letter: "A", class: "avatar-a", meta: "Local Guide · 19 reviews · 1 photo", time: "6 months ago", text: "Good value for money, fast and high-quality work!" },
+                { name: "Balázs Deák", letter: "B", class: "avatar-b", meta: "5 reviews", time: "a month ago", text: "Excellent professional, I am very satisfied with his completed work." },
+                { name: "Petra Farkas", letter: "P", class: "avatar-p", meta: "4 reviews", time: "6 months ago", text: "Roland installed an EV charger for us, and we are completely satisfied with his work. He worked precisely, took the job at a fair price, and even left a clean workspace. Highly recommended!" },
+                { name: "Anna Sarolta Poszmik", letter: "A", class: "avatar-f", meta: "1 review", time: "7 months ago", text: "Following the on-site inspection, he professionally and quickly replaced the property's outdated fuse box with a modern system that is secure from an electrical safety perspective as well. His workflow is neat. I heartily recommend Roland's services to anyone looking for reliable and high-quality electrical work." },
+                { name: "Márton Varga", letter: "M", class: "avatar-m", meta: "Local Guide · 17 reviews · 2 photos", time: "7 months ago", text: "They arrived at the agreed time, did the job properly, and left a tidy space behind. Such a professional is rare nowadays!" },
+                { name: "Rufina Rózsa", letter: "R", class: "avatar-r", meta: "8 reviews · 4 photos", time: "3 months ago", text: "Young, very skilled electrician! He arrived right on time, quickly assessed the issue, and resolved it professionally. You can see he knows his job well, plus he was very honest and helpful throughout. The price was also completely fair. I recommend him with peace of mind to anyone!" },
+                { name: "Magdolna Nagy", letter: "N", class: "avatar-n", meta: "Local Guide · 13 reviews · 3 photos", time: "7 months ago", text: "High-quality, fast, and precise work, highly trained and professional attitude, keeping the requested deadlines." },
+                { name: "Luca Petz", letter: "L", class: "avatar-l", meta: "5 reviews · 3 photos", time: "7 months ago", text: "I am fully satisfied. I highly recommend Roland to anyone. Young, punctual, fast. He answered all my messages instantly. 😊" },
+                { name: "Mónika Szabó", letter: "M", class: "avatar-m", meta: "4 reviews", time: "4 months ago", text: "Roland with his punctual, precise attitude and expertise was able to install the new intercom system, a job that many other pros had run away from previously. Roland looked for the solution and found it. Reliable, kind young man who truly loves what he does. We are very grateful to have found him. I can recommend him from the bottom of my heart, a solid 10/10 for electrical and intercom installation." },
+                { name: "Szabó Máté", letter: "S", class: "avatar-s", meta: "2 reviews", time: "3 months ago", text: "He worked for us both in Budapest and Diósd. He worked precisely and reliably. He arrived right when he promised to come. He was reachable by phone. He replaced our intercom. It wasn't easy, but he was persistent and did a great job. Works fast, excellent value for money. Recommended to everyone!" }
+            ]
+        };
+
         const data = {
             HU: {
-                logo: "VILLANYSZERELÉS",
-                badge: "ahogy működnie kell",
+                logo: "VILLANYSZERELÉS", badge: "ahogy működnie kell",
                 title: "VILLANYSZERELÉS<br><span>Villany? Bekapcsolva. <br> Hiba? Kikapcsolva.</span>",
                 sub: "Precíz villanyszerelés és modern épületautomatizálás a budai régióban. Megbízható, számlaképes szakember Diósdon, Törökbálinton és Budaörsön – biztonságra tervezett elektromos hálózatok és intelligens vezérlések kivitelezése.",
-                services: "Szolgáltatások", reviews: "Vélemények", contact: "Kapcsolat",
-                stitle: "Szolgáltatások",
-                s1t: "Épületautomatizálás", s1d: "Jövőbiztos elektromos hálózatok integrációja. Mint minősített Loxone partner vállalom okosotthon rendszerek, világítási képek, fűtés-hűtés és energiamenedzsment komplett programozását és kivitelezését Diósd és Buda környékén.",
+                services: "Szolgáltatások", reviews: "Vélemények", contact: "Kapcsolat", stitle: "Szolgáltatások",
+                // FRISSÍTETT STRUKTÚRA: Loxone Silver Partner
+                s1t: "Épületautomatizálás", s1d: "Jövőbiztos elektromos hálózatok integrációja. Mint Loxone Silver Partner vállalom okosotthon rendszerek, világítási képek, fűtés-hűtés és energiamenedzsment komplett programozását és kivitelezését Diósd és Buda környékén.",
                 s2t: "Autótöltő telepítése", s2d: "Elektromos autó (EV) töltőállomások professzionális és szabványos autótöltő telepítése otthonában vagy munkahelyén, intelligens terhelésmegosztással (Load Balancing) Budaörs és Törökbálint térségében is.",
-                s3t: "Fi-Relé beépítése cseréje", s3d: "Modern áram-védőkapcsolók (FI-relé) precíziós integrációja, diagnosztikája és szabványos cseréje az azonnali, hibátlan élet- és érintésvédelem biztosítása érdekében.",
+                s3t: "Fi-Relé beépítése cseréje", s3d: "Korszerű áram-védőkapcsoló (FI-relé) szabványos cseréje az azonnali, hibátlan élet- és érintésvédelem biztosítása érdekében.",
                 s4t: "Túlfeszültségvédelem beépítése", s4d: "Többszintű, megbízható védelmi rendszerek kiépítése a hálózatban az értékes hálózati elektronikai eszközök, kényes háztartási gépek és az okosotthon modulok abszolút biztonságáért.",
-                s5t: "Kamerarendszerek", s5d: "Nagy felbontású, éjjellátó és távolról is bármikor vezérelhető IP kamerarendszerek szakszerű tervezése és kiépítése biztonságos távoli eléréssel.",
-                s6t: "Beléptetőrendszerek", s6d: "Intelligens kaputelefonok, kulcsmentes, kódos, modern NFC vagy okostelefon-alapú beléptetőrendszerek zökkenőmentes és esztétikus integrálása.",
+                s5t: "Kamerarendszerek", s5d: "IP kamerarendszerek szakszerű kiépítése biztonságos távoli eléréssel.",
+                s6t: "Beléptetőrendszerek", s6d: "Intelligens kaputelefonok, kulcsmentes, kódos, modern NFC vagy okostelefon-alapú beléptetőrendszerek integrálása.",
                 s7t: "Hibaelhárítás", s7d: "Ha azonnali villanyszerelő segítség kell: kritikus hálózati hibák, rövidzárlatok és váratlan leállások gyors, precíziós, műszeres hibakeresése és azonnali hatékony elhárítása.",
-                grating: "★ 5.0 Google Értékelések",
-                gtitle: "Korrekt munka. Valódi minőség.", gdesc: "Ha precíz és tapasztalt villanyszerelő szakembert keres Diósd, Törökbálint vagy Budaörs környékén, a legfontosabb mérőszám a partnereim elégedettsége. Tekintse meg a hitelesített Google értékeléseket, ahol transzparens véleményeket olvashat a munkáim minőségéről.",
-                gbtn: "Vélemények megtekintése", ctitle: "írjon nekem üzenetet",
+                grating: "★ 5.0 Google Értékelések", gtitle: "Korrekt munka. Valódi minőség.", gbtn: "Vélemények megtekintése a Google-on", ctitle: "írjon nekem üzenetet",
                 lname: "NÉV", lemail: "E-MAIL CÍM", lphone: "TELEFONSZÁM", lmsg: "ÜZENET / PROJEKT LEÍRÁSA", bsubmit: "Üzenet Küldése",
                 privacy: "Elfogadom az <span onclick='openPrivacyModal()'>Adatvédelmi tájékoztatót</span>, és hozzájárulok az adataim kezeléséhez.",
-                footerPrivacy: "Adatvédelmi tájékoztató",
-                mtitle: "Adatvédelmi Tájékoztató",
-                mbtn: "Bezárás",
+                footerPrivacy: "Adatvédelmi tájékoztató", mtitle: "Adatvédelmi Tájékoztató", mbtn: "Bezárás",
                 mbody: "<p><strong>Adatkezelő:</strong> Fajth Roland E.V.<br><strong>Kapcsolat:</strong> +36 70 612 0461</p><h4>1. Az adatkezelés célja</h4><p>Az űrlapon megadott adatokat kizárólag a küldött üzenet megválaszolására, árajánlatadásra és szakmai kapcsolatfelvételre használjuk.</p><h4>2. Az adatkezelés jogalapja</h4><p>Az Ön önkéntes hozzájárulása, melyet a jelölőnégyzet bepipálásával ad meg.</p><h4>3. Az adatkezelés időtartama</h4><p>Az adatokat az ügyintézés lezárultáig vagy törlési kérelméig tároljuk.</p>",
-                fSuccess: "Köszönjük! Az üzenetet sikeresen elküldtük.",
-                fError: "Hiba történt a küldés során. Kérjük, próbálja meg újra!"
+                fSuccess: "Köszönjük! Az üzenetet sikeresen elküldtük.", fError: "Hiba történt a küldés során. Kérjük, próbálja meg újra!",
+                pName: "Az Ön neve", pEmail: "pelda@domain.com", pPhone: "+36 70 123 4567", pMsg: "Miben segíthetek?",
+                footerText: "<p>© 2026 Fajth Roland E.V. Minden jog fenntartva. | Villanyszerelés Diósd, Budaörs, Törökbálint és Buda környékén. Hivatalos Loxone Partner.</p><div class='footer-links'><span onclick='openPrivacyModal()' id='footer-privacy-link'>Adatvédelmi tájékoztató</span></div>",
+                // ÚJ: Kétnyelvű partner kiírás a fejléc alá
+                partnerRowText: `<a href="https://www.loxone.com/int/commercial/building-automation/" target="_blank" rel="noopener">Loxone Silver Partner</a>`
             },
             EN: {
-                logo: "ELECTRICAL SERVICES",
-                badge: "how it should work",
+                logo: "ELECTRICAL SERVICES", badge: "how it should work",
                 title: "ELECTRICAL SERVICES<br><span>Power? Switched on. <br> Fault? Switched off.</span>",
                 sub: "High-precision electrical engineering and modern building automation in the Buda region. Reliable, licensed professional in Diósd, Törökbálint, and Budaörs – installing safe power grids and smart control systems.",
-                services: "Services", reviews: "Reviews", contact: "Contact",
-                stitle: "Services",
-                s1t: "Building Automation", s1d: "Integration of future-proof smart grids. As a certified Loxone partner, I provide automation deployment for custom lighting scenes, HVAC, and energy optimization.",
+                services: "Services", reviews: "Reviews", contact: "Contact", stitle: "Services",
+                // FRISSÍTETT STRUKTÚRA: Loxone Silver Partner (EN)
+                s1t: "Building Automation", s1d: "Integration of future-proof smart grids. As a Loxone Silver Partner, I provide automation deployment for custom lighting scenes, HVAC, and energy optimization.",
                 s2t: "EV Charger Installation", s2d: "Professional and compliant electric vehicle (EV) charging station setup for residential properties with smart dynamic load balancing algorithms.",
                 s3t: "RCD / FI-Relay Installation & Replacement", s3d: "Precision integration, diagnostic testing, and certified replacement of modern residual current devices (RCD) to guarantee immediate shock protection.",
                 s4t: "Surge Protection Installation", s4d: "Deployment of high-performance multi-level surge protection devices (SPD) engineered for the absolute safety of your valuable electronics and Loxone smart home hardware.",
                 s5t: "Camera Systems", s5d: "Expert planning, configuration, and structural installation of secure IP camera surveillance networks with real-time encrypted remote access.",
                 s6t: "Access Control Systems", s6d: "Integration of smart intercoms, keyless entry control systems, custom pin-code access, and smartphone-driven NFC entry protocols.",
                 s7t: "Troubleshooting", s7d: "When urgent electrical help is required: rapid on-site troubleshooting, diagnostic asset tracking, and emergency fault clearance to restore operations instantly.",
-                grating: "★ 5.0 Google Reviews",
-                gtitle: "Solid work. Genuine quality.", gdesc: "If you need a highly skilled electrician near Diósd, Törökbálint, or Budaörs, partner satisfaction is my key metric. Read verified Google reviews to inspect transparent feedback.",
-                gbtn: "View Google Reviews", ctitle: "Send me a message",
+                grating: "★ 5.0 Google Reviews", gtitle: "Solid work. Genuine quality.", gbtn: "View Reviews on Google", ctitle: "Send me a message",
                 lname: "FULL NAME", lemail: "EMAIL ADDRESS", lphone: "PHONE NUMBER", lmsg: "MESSAGE / PROJECT DETAILS", bsubmit: "Send Message",
                 privacy: "I accept the <span onclick='openPrivacyModal()'>Privacy Policy</span> and consent to the processing of my data.",
-                footerPrivacy: "Privacy Policy",
-                mtitle: "Privacy Policy",
-                mbtn: "Close",
+                footerPrivacy: "Privacy Policy", mtitle: "Privacy Policy", mbtn: "Close",
                 mbody: "<p><strong>Data Controller:</strong> Roland Fajth E.V.<br><strong>Contact:</strong> +36 70 612 0461</p><h4>1. Purpose of Data Processing</h4><p>The data provided on the form is used exclusively to answer your request, provide quotes, and establish business contact.</p><h4>2. Legal Basis</h4><p>Your voluntary and explicit consent given by checking the privacy checkbox before submission.</p><h4>3. Data Retention</h4><p>Data will be stored until the communication request is resolved or until you request its deletion.</p>",
-                fSuccess: "Thank you! Your message has been sent successfully.",
-                fError: "An error occurred. Please try again later."
+                fSuccess: "Thank you! Your message has been sent successfully.", fError: "An error occurred. Please try again later.",
+                pName: "Your Full Name", pEmail: "example@domain.com", pPhone: "+36 70 123 4567", pMsg: "How can I help you?",
+                footerText: "<p>© 2026 Roland Fajth E.V. All rights reserved. | Electrical installations in Diósd, Budaörs, Törökbálint and the Buda region. Official Loxone Partner.</p><div class='footer-links'><span onclick='openPrivacyModal()' id='footer-privacy-link'>Privacy Policy</span></div>",
+                partnerRowText: `<a href="https://www.loxone.com/int/commercial/building-automation/" target="_blank" rel="noopener">Loxone Silver Partner</a>`
             }
         };
+
+        // SLIDER KEZELŐ LOGIKA
+        let currentSlideIdx = 0;
+        let autoSlideInterval;
+
+        const googleStarsSvgHtml = `
+            <div class="google-stars-row">
+                ${Array(5).fill(`<svg class="google-star-svg" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>`).join('')}
+            </div>
+        `;
+
+        function renderSlider() {
+            const wrapper = document.getElementById('slider-wrapper');
+            const dotsContainer = document.getElementById('slider-dots');
+            const currentReviews = googleReviewsData[currentLang];
+            
+            wrapper.innerHTML = '';
+            dotsContainer.innerHTML = '';
+
+            currentReviews.forEach((review, idx) => {
+                const slide = document.createElement('div');
+                slide.className = `review-slide ${idx === currentSlideIdx ? 'active' : ''}`;
+                slide.innerHTML = `
+                    <div class="reviewer-header-block">
+                        <div class="reviewer-meta">
+                            <div class="reviewer-avatar ${review.class}">${review.letter}</div>
+                            <div class="reviewer-details">
+                                <h4>${review.name}</h4>
+                                <div class="reviewer-sub-info">${review.meta}</div>
+                                ${googleStarsSvgHtml}
+                            </div>
+                        </div>
+                        <div class="review-date">${review.time}</div>
+                    </div>
+                    <p class="review-text">"${review.text}"</p>
+                `;
+                wrapper.appendChild(slide);
+
+                const dot = document.createElement('div');
+                dot.className = `slider-dot ${idx === currentSlideIdx ? 'active' : ''}`;
+                dot.onclick = () => goToSlide(idx);
+                dotsContainer.appendChild(dot);
+            });
+        }
+
+        function showSlide(idx) {
+            const slides = document.querySelectorAll('.review-slide');
+            const dots = document.querySelectorAll('.slider-dot');
+            if(!slides.length) return;
+
+            slides[currentSlideIdx].classList.remove('active');
+            dots[currentSlideIdx].classList.remove('active');
+
+            currentSlideIdx = (idx + slides.length) % slides.length;
+
+            slides[currentSlideIdx].classList.add('active');
+            dots[currentSlideIdx].classList.add('active');
+            
+            resetAutoSlide();
+        }
+
+        function nextSlide() { showSlide(currentSlideIdx + 1); }
+        function prevSlide() { showSlide(currentSlideIdx - 1); }
+        function goToSlide(idx) { showSlide(idx); }
+
+        function startAutoSlide() { autoSlideInterval = setInterval(nextSlide, 7000); }
+        function resetAutoSlide() { clearInterval(autoSlideInterval); startAutoSlide(); }
 
         function toggleLanguage() {
             currentLang = currentLang === 'HU' ? 'EN' : 'HU';
@@ -1134,7 +1432,6 @@
 
             document.getElementById('google-rating-text').innerText = data[currentLang].grating;
             document.getElementById('google-title').innerText = data[currentLang].gtitle;
-            document.getElementById('google-desc').innerText = data[currentLang].gdesc;
             document.getElementById('btn-reviews').innerText = data[currentLang].gbtn;
             document.getElementById('contact-title').innerText = data[currentLang].ctitle;
 
@@ -1145,14 +1442,30 @@
             document.getElementById('btn-submit').innerText = data[currentLang].bsubmit;
             
             document.getElementById('txt-privacy').innerHTML = data[currentLang].privacy;
-            document.getElementById('footer-privacy-link').innerText = data[currentLang].footerPrivacy;
             document.getElementById('m-title').innerText = data[currentLang].mtitle;
             document.getElementById('m-btn').innerText = data[currentLang].mbtn;
             document.getElementById('m-body').innerHTML = data[currentLang].mbody;
             
             document.getElementById('fs-success').innerText = data[currentLang].fSuccess;
             document.getElementById('fs-error').innerText = data[currentLang].fError;
+
+            document.getElementById('name').placeholder = data[currentLang].pName;
+            document.getElementById('email').placeholder = data[currentLang].pEmail;
+            document.getElementById('phone').placeholder = data[currentLang].pPhone;
+            document.getElementById('message').placeholder = data[currentLang].pMsg;
+
+            document.getElementById('footer-text').innerHTML = data[currentLang].footerText;
+            
+            // Partner link szöveg frissítése nyelvváltáskor
+            document.getElementById('hero-partner-row').innerHTML = data[currentLang].partnerRowText;
+
+            renderSlider();
         }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            renderSlider();
+            startAutoSlide();
+        });
     </script>
 </body>
 </html>
